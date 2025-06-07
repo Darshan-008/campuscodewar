@@ -20,7 +20,7 @@ const executeC = (filepath, inputPath, timeout = 5000) => {
   const errorPath = path.join(outputPath, `${jobId}.err`);
 
   return new Promise((resolve, reject) => {
-    const command = `g++ ${filepath} -o ${outPath} && ${outPath}`;
+    let command = `g++ ${filepath} -o ${outPath} && ${outPath}`;
     if (inputPath) {
       command += ` < ${inputPath}`;
     }

@@ -21,6 +21,7 @@ import executeC from "./Compiler/executeC.js";
 import executeJava from "./Compiler/executeJava.js";
 import generateInputFile from "./Compiler/generateInputFile.js";
 import { authMiddleware } from "./middleware/auth.js";
+import { z } from 'zod';
 
 // Import all models to ensure they're registered
 import "./models/user.js";
@@ -368,17 +369,17 @@ app.get("/health", async (req, res) => {
 });
 
 // Request logging middleware
-app.use((req, res, next) => {
+app.use((req, res, /*next*/) => {
   const start = Date.now();
   res.on('finish', () => {
     const duration = Date.now() - start;
     console.log(`[${new Date().toISOString()}] ${req.method} ${req.path} - ${res.statusCode} (${duration}ms)`);
   });
-  next();
+  //next();
 });
 
 // Error handling middleware
-app.use((err, req, res, next) => {
+app.use((err, req, res) => {
   console.error('Error:', err);
   
   // Handle different types of errors
