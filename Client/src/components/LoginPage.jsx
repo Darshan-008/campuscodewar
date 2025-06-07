@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { login } from "../services/authService";
 
@@ -110,7 +110,7 @@ function LoginPage() {
 
         <div className="text-center">
           <p className="text-sm text-gray-400">
-            Don't have an account?{" "}
+            Don&apos;t have an account?{" "}
             <Link
               to="/signup"
               className="font-medium text-blue-400 hover:text-blue-300"

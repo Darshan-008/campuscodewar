@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
@@ -7,7 +7,6 @@ import axiosInstance from "../services/axiosInstance";
 function MyProblems() {
   const [problems, setProblems] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
   const isAdmin = user?.role === "admin";
@@ -19,14 +18,12 @@ function MyProblems() {
   const fetchProblems = async () => {
     try {
       setLoading(true);
-      setError(null);
       const response = await axiosInstance.get('/problems');
       if (response.data?.success) {
         setProblems(response.data.data);
       }
     } catch (err) {
       console.error('Error fetching problems:', err);
-      setError(err.response?.data?.message || 'Failed to fetch problems');
     } finally {
       setLoading(false);
     }
