@@ -1,4 +1,6 @@
-import express from "express";
+import express from 'express';
+const app = express();
+
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 import cors from "cors";
@@ -28,8 +30,6 @@ import "./models/user.js";
 import "./models/Problem.js";
 import "./models/Solution.js";
 import "./models/userCode.js";
-
-const app = express();
 
 // Rate limiting configuration
 const limiter = rateLimit({
@@ -421,6 +421,4 @@ app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
 
-// "scripts": {
-//   "lint": "eslint ."
-// }
+export { app };

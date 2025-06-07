@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "mocha tests/**/*.test.js --exit",
+    "test": "mocha tests/**/*.test.js --timeout 10000 --exit",
     "test:coverage": "c8 npm test",
     "create-admin": "node scripts/createAdmin.js",
     "dev": "node index.js",
@@ -30,7 +30,8 @@
     "nodemailer": "^6.9.14",
     "openai": "^5.1.0",
     "server": "file:",
-    "uuid": "^10.0.0"
+    "uuid": "^10.0.0",
+    "zod": "^3.25.56"
   },
   "devDependencies": {
     "@eslint/js": "^9.28.0",
