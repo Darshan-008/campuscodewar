@@ -23,6 +23,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+      with:
+        path: Client
+
+    - name: Copy .git to Client
+      run: cp -r .git ./Client/
 
     - name: Use Node.js ${{ matrix.node-version }}
       uses: actions/setup-node@v3
@@ -60,4 +65,4 @@ jobs:
         vercel-token: ${{ secrets.VERCEL_TOKEN }}
         vercel-org-id: ${{ secrets.VERCEL_ORG_ID }}
         vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID }}
-        working-directory: ./Client 
+        working-directory: ./Client
