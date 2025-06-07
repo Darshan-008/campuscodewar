@@ -1,0 +1,42 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "mocha tests/**/*.test.js --exit",
+    "test:coverage": "c8 npm test",
+    "create-admin": "node scripts/createAdmin.js",
+    "dev": "node index.js",
+    "start": "node index.js",
+    "lint": "eslint ."
+  },
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@google/generative-ai": "^0.1.3",
+    "@huggingface/inference": "^4.0.2",
+    "backend": "file:",
+    "bcrypt": "^6.0.0",
+    "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.5.0",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.5.2",
+    "nodemailer": "^6.9.14",
+    "openai": "^5.1.0",
+    "server": "file:",
+    "uuid": "^10.0.0"
+  },
+  "devDependencies": {
+    "c8": "^9.1.0",
+    "chai": "^5.1.0",
+    "eslint": "^8.57.0",
+    "mocha": "^10.3.0",
+    "supertest": "^6.3.4"
+  }
+}

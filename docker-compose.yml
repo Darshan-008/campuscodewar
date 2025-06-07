@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  backend:
+    build: 
+      context: ./Server
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - MONGO_URI=${MONGO_URI}
+      - JWT_SECRET=${JWT_SECRET}
+      - EMAIL=${EMAIL}
+      - EMAIL_PASSWORD=${EMAIL_PASSWORD}
+      - FRONTEND_URL=${FRONTEND_URL}
+    volumes:
+      - ./Server/Compiler/codes:/usr/src/app/Compiler/codes
+      - ./Server/Compiler/inputs:/usr/src/app/Compiler/inputs
+      - ./Server/Compiler/outputs:/usr/src/app/Compiler/outputs
+    restart: unless-stopped
