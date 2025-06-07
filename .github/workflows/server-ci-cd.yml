@@ -40,6 +40,7 @@ jobs:
       run: npm ci
 
     - name: Lint
+      working-directory: ./Server
       run: npx eslint .
 
     - name: Run tests
