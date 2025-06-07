@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 import axiosInstance from '../services/axiosInstance';
 
 const GenerateWithAI = ({ onProblemGenerated, onClose }) => {
@@ -55,13 +56,11 @@ const GenerateWithAI = ({ onProblemGenerated, onClose }) => {
     } catch (err) {
       console.error('Error generating problem:', err);
       
-      // Handle specific error cases
       if (err.response?.status === 401) {
         setError('You must be logged in as an admin to generate problems.');
       } else if (err.response?.status === 403) {
         setError('You do not have permission to generate problems. Admin access required.');
       } else if (err.response?.data?.error) {
-        // Show the specific error from the server
         setError(`Generation failed: ${err.response.data.error}`);
       } else if (err.message === 'Network Error') {
         setError('Unable to connect to the server. Please check your internet connection.');
@@ -82,7 +81,7 @@ const GenerateWithAI = ({ onProblemGenerated, onClose }) => {
       <div className="bg-gray-800 p-6 rounded-lg shadow-xl w-full max-w-2xl">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-white">Generate Problem with AI</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-white">
+          <button onClick={onClose} className="text-gray-400 hover:text-white" aria-label="Close">
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
             </svg>
@@ -90,7 +89,7 @@ const GenerateWithAI = ({ onProblemGenerated, onClose }) => {
         </div>
 
         {error && (
-          <div className="mb-4 p-3 bg-red-500/20 border border-red-500 rounded text-red-400">
+          <div className="mb-4 p-3 bg-red-500/20 border border-red-500 rounded text-red-400" role="alert">
             {error}
           </div>
         )}
@@ -121,10 +120,11 @@ const GenerateWithAI = ({ onProblemGenerated, onClose }) => {
         {mode === 'quick' ? (
           <>
             <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-300 mb-2">
+              <label className="block text-sm font-medium text-gray-300 mb-2" htmlFor="difficulty-select">
                 Difficulty Level
               </label>
               <select
+                id="difficulty-select"
                 value={generationParams.difficulty}
                 onChange={(e) => setGenerationParams({
                   ...generationParams,
@@ -152,6 +152,7 @@ const GenerateWithAI = ({ onProblemGenerated, onClose }) => {
                     <button
                       onClick={() => removeTag(tag)}
                       className="ml-2 text-blue-200 hover:text-white"
+                      aria-label={`Remove tag ${tag}`}
                     >
                       ×
                     </button>
@@ -165,15 +166,17 @@ const GenerateWithAI = ({ onProblemGenerated, onClose }) => {
                 onKeyDown={handleTagInput}
                 className="w-full p-3 border border-gray-600 rounded bg-gray-700 text-gray-100"
                 placeholder="Type a tag and press Enter (e.g., arrays, dynamic-programming)"
+                aria-label="Tag input"
               />
             </div>
           </>
         ) : (
           <div className="mb-4">
-            <label className="block text-sm font-medium text-gray-300 mb-2">
+            <label className="block text-sm font-medium text-gray-300 mb-2" htmlFor="custom-prompt-textarea">
               Custom Requirements
             </label>
             <textarea
+              id="custom-prompt-textarea"
               value={generationParams.customPrompt}
               onChange={(e) => setGenerationParams({
                 ...generationParams,
@@ -187,6 +190,7 @@ Example:
 - Should involve traversal and recursion
 - Include time and space complexity requirements
 - Add constraints for tree size and node values"
+              aria-label="Custom problem requirements"
             />
           </div>
         )}
@@ -205,7 +209,7 @@ Example:
           >
             {loading ? (
               <>
-                <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24">
+                <svg className="animate-spin h-5 w-5" viewBox="0 0 24 24" aria-hidden="true">
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
                   <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
                 </svg>
@@ -219,6 +223,11 @@ Example:
       </div>
     </div>
   );
+};
+
+GenerateWithAI.propTypes = {
+  onProblemGenerated: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
 };
 
 export default GenerateWithAI;

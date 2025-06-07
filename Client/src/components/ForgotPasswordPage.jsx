@@ -1,6 +1,7 @@
-import { useState } from "react";
+import React, { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import { forgotPassword } from "../services/authService";
+import PropTypes from 'prop-types';
 
 function ForgotPasswordPage() {
   const [email, setEmail] = useState("");
