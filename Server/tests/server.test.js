@@ -1,4 +1,3 @@
-import { expect } from 'chai';
 import request from 'supertest';
 import { app } from '../index.js';
 
@@ -8,9 +7,9 @@ describe('Server API Tests', function () {
   describe('Authentication Endpoints', function () {
     it('should return 400 for invalid login', async () => {
       await request(app)
-        .post('/api/login') // <-- match your actual route
+        .post('/api/auth/login')
         .send({ email: 'invalid@example.com', password: 'wrongpassword' })
-        .expect(401); // Your code returns 401 for invalid login, not 400!
+        .expect(400);
     });
   });
 });
