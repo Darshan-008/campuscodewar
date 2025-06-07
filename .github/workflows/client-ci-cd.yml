@@ -59,6 +59,10 @@ jobs:
         with:
           path: Client
           fetch-depth: 0
+      - name: Check if Client is a git repo
+        run: |
+          ls -la Client/.git
+          git -C Client status
       - name: Deploy to Vercel
         uses: amondnet/vercel-action@v20
         with:
