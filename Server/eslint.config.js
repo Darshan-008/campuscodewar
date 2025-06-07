@@ -34,4 +34,10 @@ export default [
       ],
     },
   },
+  {
+    files: ["**/*.js"],
+    rules: {
+      // Add your custom rules here
+    },
+  },
 ];
