@@ -1,6 +1,5 @@
 import js from "@eslint/js";
 import globals from "globals";
-import pluginReact from "eslint-plugin-react";
 
 export default [
   {
@@ -12,13 +11,7 @@ export default [
         ...globals.mocha, // for describe, it, before, after
       },
     },
-    settings: {
-      react: {
-        version: "detect", // Fixes the react version warning
-      },
-    },
   },
-  pluginReact.configs.flat.recommended,
   js.configs.recommended,
   {
     files: ["**/*.{js,mjs,cjs,jsx}"],
