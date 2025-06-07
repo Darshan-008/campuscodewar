@@ -12,8 +12,13 @@ function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
-    setIsLoading(true);
 
+    if (!email) {
+      setError("Please enter your email.");
+      return;
+    }
+
+    setIsLoading(true);
     try {
       const response = await login(email, password);
       console.log("Login successful:", response);
@@ -45,12 +50,8 @@ function LoginPage() {
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           {error && (
-            <div className="rounded-md bg-red-50 p-4">
-              <div className="flex">
-                <div className="ml-3">
-                  <h3 className="text-sm font-medium text-red-800">{error}</h3>
-                </div>
-              </div>
+            <div className="text-red-500 text-sm mb-2" role="alert">
+              {error}
             </div>
           )}
           <div className="rounded-md shadow-sm -space-y-px">
@@ -60,11 +61,11 @@ function LoginPage() {
                 name="email"
                 type="email"
                 autoComplete="email"
-                required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                 placeholder="Email address"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
+                aria-label="email"
               />
             </div>
             <div>
@@ -73,11 +74,11 @@ function LoginPage() {
                 name="password"
                 type="password"
                 autoComplete="current-password"
-                required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-sm"
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
+                aria-label="password"
               />
             </div>
           </div>
