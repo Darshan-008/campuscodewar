@@ -64,6 +64,8 @@ jobs:
       with:
         path: Client
         fetch-depth: 0
+    - name: Copy .git to Client
+      run: cp -r .git ./Client/
     - name: Deploy to Vercel
       uses: amondnet/vercel-action@v20
       with:
